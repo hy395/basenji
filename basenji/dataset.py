@@ -54,8 +54,8 @@ def file_to_records(filename):
 #     self.make_dataset()
 
 class SeqDataset:
-  def __init__(self, data_dir, split_label, batch_size, shuffle_buffer=32,
-               seq_length_crop=None, mode=tf.estimator.ModeKeys.EVAL, tfr_pattern=None):
+  def __init__(self, data_dir, split_label, batch_size, shuffle_buffer=128,
+               seq_length_crop=None, mode='eval', tfr_pattern=None):
     """Initialize basic parameters; run compute_stats; run make_dataset."""
 
     self.data_dir = data_dir
@@ -135,7 +135,7 @@ class SeqDataset:
       dataset = tf.data.Dataset.list_files(self.tfr_path)
 
     # train
-    if self.mode == tf.estimator.ModeKeys.TRAIN:
+    if self.mode == 'train':
       # repeat
       dataset = dataset.repeat()
 
